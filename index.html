@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="CtrlMain">
+		<form name="registerform" ng-submit="register(registerform)" ng-validate="validationOptions">
+			<input type="email" name="email" placeholder="email">
+			<input type="password" name="password" placeholder="password">
+			<input type="submit">
+		</form>
+	</div>
+
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/jquery-validation/dist/jquery.validate.js"></script>
+
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="src/angular-validate.js"></script>
+
+	<script>
+		angular.module('myApp', ['ngValidate'] )
+		    .controller('CtrlMain', ['$scope','$window', function ($scope,$window) {
+			$scope.validationOptions = {
+				    rules: {
+				        email: {
+				            required: true,
+				            email: true
+				        },
+				        password: {
+				            required: true,
+				            minlength: 6
+				        }
+				    },
+				    messages: {
+				        email: {
+				            required: "We need your email address to contact you",
+				            email: "Your email address must be in the format of name@domain.com"
+				        },
+				        password: {
+				            required: "You must enter a password",
+				            minlength: "Your password must have a minimum length of 6 characters"
+				        }
+				    }
+				};
+
+				$scope.register = function (form) {
+					if(form.validate()) {
+						console.log('check valid form !');
+					} else {
+						$window.alert("There are " + form.numberOfInvalids() + " invalid fields.");
+					}
+				};
+		  }]);
+
+	</script>
+</body>
+</html>

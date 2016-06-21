@@ -19,5 +19,8 @@
   ],
   "dependencies": {
     "jquery-validation": "~1.14.0"
+  },
+  "devDependencies": {
+    "angular": "^1.5.7"
   }
 }
